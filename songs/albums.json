@@ -1,0 +1,19 @@
+{
+  "albums": [
+    {
+      "folder": "arjan dhillon",
+      "title": "Arjan Dhillon",
+      "description": "Top Punjabi Hits"
+    },
+    {
+      "folder": "Amanraj Gill",
+      "title": "Amanraj Gill",
+      "description": "Top Punjabi Hits"
+    },
+    {
+      "folder": "Arjun Sahota",
+      "title": "Arjun Sahota",
+      "description": "Top Punjabi Hits"
+    }
+  ]
+}
