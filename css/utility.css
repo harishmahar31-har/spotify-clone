@@ -1,0 +1,109 @@
+::-webkit-scrollbar {
+  width: 10px;                /* width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: #1e1e1e;        /* dark background for track */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #555;     /* color of the draggable part */
+  border-radius: 10px;        /* round corners */
+  border: 2px solid #1e1e1e;  /* space between thumb and track */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #777;     /* lighter on hover */
+}
+
+/* ===== For Firefox ===== */
+* {
+  scrollbar-width: thin;              /* "auto" or "thin" */
+  scrollbar-color: #555 #1e1e1e;      /* thumb color | track color */
+}
+.flex{
+    display: flex;
+}
+.flex-c{
+    display: flex;
+    flex-direction: column;
+}
+.flex-w{
+    flex-wrap: wrap;
+}
+.bg-grey{
+    background-color: #202020;
+}
+.justify-c{
+    justify-content: center;
+}
+.align-c{
+    align-items: center;
+}
+.border{
+    border: 2px solid red;
+    margin: 3px;
+}
+.text-white{
+    color: white;
+}
+.toggle{
+    filter: invert(1);
+}
+.gap-45{
+    gap: 45px;
+}
+.gap-30{
+    gap: 30px;
+}
+.gap-20{
+    gap: 20px;
+}
+.gap-25{
+    gap: 25px;
+}
+.gap-15{
+    gap: 15px;
+}
+.gap-10{
+    gap: 10px;
+}
+.gap-5{
+    gap: 5px;
+}
+.m-5{
+    margin: 5px;
+}
+.m-10{
+    margin: 10px;
+}
+.m-15{
+    margin: 15px;
+}
+.pad-5{
+    padding: 5px;
+}
+.pad-10{
+    padding: 10px;
+}
+.pad-15{
+    padding: 5px 15px;
+}
+.p-15{
+    padding: 15px;
+}
+.pad-25{
+    padding: 25px;
+}
+.b-r-25{
+    border-radius: 25px;
+}
+.b-r-8{
+    border-radius: 8px;
+}
+.b-r-12{
+    border-radius: 12px;
+}
+.justify-b{
+    justify-content: space-between;
+}

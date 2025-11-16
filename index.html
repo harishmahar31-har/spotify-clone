@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify - Web Player: Music for everyone</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/utility.css">
+    <link rel="shortcut icon" href="logo/spotify.png" type="image/png">
+</head>
+
+<body>
+
+    <div class="header text-white flex filter justify-b">
+        <div class="headerleft flex pad-5 ">
+
+            <div class="logo flex ">
+                <img width="" id="logo" src="logo/spotify.svg" alt="" class="new">
+                <img width="26px" id="home" src="logo/home.svg.svg" alt="" class=" b-r-25 pad-10">
+            </div>
+            <div class="search bg-grey flex gap-15 pad-15 b-r-25 ">
+                <img src="logo/search.svg" alt="" id="btnsearch">
+                <input type="text" id="searchSong" placeholder="What do you want to play?">
+                <img src="logo/bag.svg" alt="" id="btnexplore">
+            </div>
+        </div>
+
+        <div class="headerright flex align-c gap-15">
+            <div class="options flex align-c gap-15">
+                <a href="https://www.spotify.com/in-en/premium/">Premium</a>
+                <a href="https://support.spotify.com/in-en/">Support</a>
+                <a href="https://www.spotify.com/in-en/download/windows/">Download</a>
+                <a href="https://open.spotify.com/download">↓ Install App</a>
+                <a
+                    href="https://www.spotify.com/in-en/signup?forward_url=https%3A%2F%2Fopen.spotify.com%2Fdownload">Signup</a>
+                <!-- <button id="btnlogout">Log in</button> -->
+                <a href="login.html" target="_blank">
+                    <button id="btnlogout">Login</button>
+                </a>
+
+            </div>
+            <div id="imageBox" class="hamburger  hburgeroptions">
+                <img id="leftarrow" width="25px" class="toggle" src="logo/arrow-left.svg" alt="">
+            </div>
+        </div>
+    </div>
+    <div class="container flex text-white gap-5">
+        <div class="left bg-grey b-r-8">
+            <div class="left1 flex justify-b pad-15 m-10">
+                <div class="library flex align-c gap-10">
+                    <img width="30px" src="logo/library.svg" alt="" style="filter: invert();">
+                    <h3>Your Library</h3>
+                </div>
+                <div class="newplaylist flex gap-10">
+                    <div class="add">
+                        <img width="25px" class="toggle" src="logo/music-add.svg" alt="">
+                    </div>
+                    <div class="hburgerlibraryclose">
+                        <img width="25px" class="toggle" src="logo/arrow-left.svg" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="songlist ">
+                <ul>
+
+                </ul>
+            </div>
+            <div class="footercontainer">
+
+                <div class="left3 flex flex-c ">
+                    <div class="left3a flex gap-15 flex-w">
+                        <a href="https://www.spotify.com/in-en/legal/end-user-agreement/">Legal</a>
+                        <a href="https://www.spotify.com/in-en/safetyandprivacy">Safety & Privacycenter</a>
+                    </div>
+                    <div class="left32 flex gap-15 flex-w">
+                        <a href="https://www.spotify.com/in-en/legal/privacy-policy/">PrivacyPo1licy</a>
+                        <a href="https://www.spotify.com/in-en/legal/cookies-policy/">Cookies</a>
+                        <a href="https://www.spotify.com/in-en/legal/privacy-policy/#s3">AboutAds</a>
+                    </div>
+                    <div class="left3c flex">
+                        <a href="https://www.spotify.com/in-en/accessibility">Accesiblity</a>
+                    </div>
+                </div>
+                <div class="left4">
+                    <a href="https://www.spotify.com/in-en/legal/cookies-policy/">cookies</a>
+                </div>
+                <div class="left5 pad-15">
+                    <button id="btnbrowse"><img id="browse" src="icons8-internet-64.png" alt=""><b>English</b></button>
+                </div>
+            </div>
+        </div>
+        <div class="right bg-grey b-r-8 ">
+            <div class="options2 flex flex-c gap-25 bg-grey ">
+                <a href="https://www.spotify.com/in-en/premium/">Premium</a>
+                <a href="https://support.spotify.com/in-en/">Support</a>
+                <a href="https://www.spotify.com/in-en/download/windows/">Download</a>
+                <a href="https://open.spotify.com/download">↓ Install App</a>
+                <a
+                    href="https://www.spotify.com/in-en/signup?forward_url=https%3A%2F%2Fopen.spotify.com%2Fdownload">Signup</a>
+                <button id="btnlogout">Log in</button>
+            </div>
+            <div class="hamburger hburgerlibrary  m-10 ">
+                <img id="rightarrow" width="25px" class="toggle" src="logo/arrow-right.svg" alt="">
+                <h3>Musiclist</h3>
+            </div>
+            <div class="right1 flex justify-b align-c">
+                <a href="">
+                    <h2 class="text-white">ARTISTS</h2>
+                </a>
+                <a href="">
+                    <h4>Load page</h4>
+                </a>
+            </div>
+            <div class="cardcontainer flex  flex-w">
+
+
+            </div>
+            <div class="playseek flex flex-c  ">
+
+                <div class="playbar b-r-8 flex  pad-15 ">
+                    <div class="songinfo">
+
+                    </div>
+                    <div class="playbuttons flex gap-25">
+                        <img id="previous" src="logo/next.svg" alt="">
+                        <img id="play" src="logo/play.svg" alt="">
+                        <img id="next" src="logo/previous.svg" alt="">
+                    </div>
+                    <div class="songtime">
+
+                    </div>
+                </div>
+                <div class="seek m-5">
+                </div>
+                <div class="dot"></div>
+
+            </div>
+
+        </div>
+    </div>
+    <script src="js/script.js"></script>
+    <!-- <script src="harish.js"></script> -->
+</body>
+
+</html>

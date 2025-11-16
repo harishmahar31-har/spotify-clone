@@ -1,0 +1,239 @@
+console.log(`lets write some javascript`)
+let currentSong = new Audio();
+let songs;
+// let ;
+
+
+
+
+function secondsToMinutesSeconds(seconds) {
+    if (isNaN(seconds) || seconds < 0) {
+        return "00:00";
+    }
+
+
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = Math.floor(seconds % 60);
+
+    const formattedMinutes = String(minutes).padStart(2, '0');
+    const formattedSeconds = String(remainingSeconds).padStart(2, '0');
+
+
+    return `${formattedMinutes}:${formattedSeconds}`;
+}
+
+
+async function getSongs(folder) {
+    currFolder = folder;
+    let a = await fetch(`http://127.0.0.1:3000/${folder}`);
+    let response = await a.text();
+    console.log("response from getsongs"+response);
+    let div = document.createElement("div");
+    div.innerHTML = response;
+    let as = div.getElementsByTagName("a");
+    songs = []
+    for (let index = 0; index < as.length; index++) {
+        const element = as[index];
+        if (element.href.endsWith(".mp3")) {
+            let filename = element.href.split("/").pop();  // FIXED
+            console.log("check filenames----"+decodeURI(filename))
+            console.log("check fol----"+decodeURI(`${folder}`))
+            console.log('filnes---',decodeURIComponent(filename).split(/[/\\]/).pop().split('.mp3')[0])
+            console.log("check songsnames"+decodeURI(folder).split(decodeURI(`${folder}`)))
+            songs.push(decodeURIComponent(filename).split(/[/\\]/).pop().split('.mp3')[0]);
+        }
+    }
+
+
+    //show all the songs in the playlist
+
+    let songUL = document.querySelector(".songlist").getElementsByTagName("ul")[0];
+    songUL.innerHTML = " "
+    for (const song of songs) {
+        // console.log("sdfkjsd-----"+decodeURI(song).split("\\")[1].split(".mp3")[0])
+        songUL.innerHTML = songUL.innerHTML + `<li>
+                        <div class = "musinfo ">
+                            <img src="logo/music.svg" alt="">
+                            
+                            <div class="info"> ${decodeURI(song)}</div>
+                        </div>                            
+                        <div class="playnow">
+                            <span>play now</span>
+                            <img src="logo/play.svg" alt="">
+                        </div>
+        </li>`;
+
+    }
+    Array.from(document.querySelector(".songlist").getElementsByTagName("li")).forEach(e => {
+        e.addEventListener("click", element => {
+            console.log('song-namewhen click--',`${currFolder}/`+e.querySelector(".info").innerHTML.trim() + '.mp3');
+            playMusic(e.querySelector(".info").innerHTML.trim());
+        })
+    })
+    return songs;
+}
+const playMusic = (track, pause = false) => {
+    console.log('track---',track,currFolder)
+    // let audio = new Audio("/songs/" + track)
+    // console.log(decodeURI(track).split('.mp3')[0].split('ncs\\')[1])
+    currentSong.src = `${currFolder}/` + track +".mp3"
+    console.log('cuurent---',currentSong.src)
+    if (!pause) {
+        currentSong.play()
+        play.src = "logo/pause.svg"
+
+    }
+    console.log("song1---"+decodeURI(track))
+    document.querySelector(".songinfo").innerHTML = decodeURI(track)
+    document.querySelector(".songtime").innerHTML = "00:00 / 00:00"
+}
+
+async function displayalbums(){
+    let a = await fetch(`http://127.0.0.1:3000/songs/`);
+    let response = await a.text();
+    let div = document.createElement("div");
+    div.innerHTML = response;
+    console.log(div);
+    let anchors = div.getElementsByTagName("a")
+    let cardContainer = document.querySelector(".cardcontainer")
+    let array = Array.from(anchors)
+        for (let index = 0; index < array.length; index++) {
+            const e = array[index];
+            
+        
+        // console.log(e.href)
+        if(e.href.includes("%5Csongs")){
+            let folder = e.href.split("%5C").slice(-1)[0]
+            console.log("folder-"+folder)
+            //get the meta data fo the folder
+            let a = await fetch(`http://127.0.0.1:3000/songs/${folder}info.json`);
+            let response = await a.json();
+            // console.log(response)
+            cardContainer.innerHTML = cardContainer.innerHTML + `<div data-folder="${folder}" class="card ">
+                    <div class="play">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="black">
+                            <path d="M8 5v14l11-7z" />
+                        </svg>
+                    </div>
+
+                    <img src="/songs/${folder}/cover.jpg" alt="">
+                    <h5>${response.title}</h5>
+                    <p>${response.description}</p>
+                </div>`
+        }
+    }
+    // console.log(anchors)
+    //load the playlist when the card is clicked
+
+    Array.from(document.getElementsByClassName("card")).forEach(e => {
+        // console.log(e)
+        e.addEventListener("click",async item => {
+            console.log("----mydata---card--" , item.currentTarget.dataset.folder)
+            songs = await getSongs(`songs/${item.currentTarget.dataset.folder}`)
+            console.log('default song of card--',songs[0])
+            playMusic(songs[0]);
+        })
+    })
+}
+
+async function main() {
+    await getSongs("songs/ncs");
+    playMusic(songs[0], true)
+
+    //display all the albums on the page
+    displayalbums()
+
+    // attach event listener to play , previous and next
+    play.addEventListener("click", () => {
+        if (currentSong.paused) {
+            currentSong.play();
+            play.src = "logo/pause.svg"
+        }
+        else {
+            currentSong.pause()
+            play.src = "logo/play.svg"
+        }
+    })
+    //listen for time update event
+    currentSong.addEventListener("timeupdate", () => {
+        // console.log(currentSong.currentTime, currentSong.duration)
+        document.querySelector(".songtime").innerHTML = `${secondsToMinutesSeconds(currentSong.currentTime)} / ${secondsToMinutesSeconds(currentSong.duration)}`
+        document.querySelector(".dot").style.left = (currentSong.currentTime / currentSong.duration) * 98 + "%";
+    })
+
+    //add an event listener to seekbar
+    document.querySelector(".seek").addEventListener("click", e => {
+        let percent = (e.offsetX / e.target.getBoundingClientRect().width) * 100
+        document.querySelector(".dot").style.left = percent + "%";
+        currentSong.currentTime = ((currentSong.duration) * percent) / 100
+    })
+
+    //add event listener to hamburger
+    document.querySelector(".hburgerlibrary").addEventListener("click", () => {
+        document.querySelector(".left").style.left = "0"
+    })
+    //add event listener to close hamburger
+    document.querySelector(".hburgerlibraryclose").addEventListener("click", () => {
+        document.querySelector(".left").style.left = "-100%"
+    })
+
+    const imageBox = document.getElementById("imageBox");
+    const img = imageBox.querySelector("img");
+
+    imageBox.addEventListener("click", function handleDivClick() {
+        // Step 1: change image when div is clicked
+        img.src = "logo/arrow-right.svg";
+        document.querySelector(".options2").style.top = "0"
+
+        // Step 2: temporarily remove this event so it doesn’t trigger again
+        imageBox.removeEventListener("click", handleDivClick);
+
+        // Step 3: add click event on the new image
+        img.addEventListener("click", function handleImageClick(e) {
+            e.stopPropagation(); // prevent triggering div’s click accidentally
+            img.src = "logo/arrow-left.svg"; // change back to original image
+            document.querySelector(".options2").style.top = "-110%"
+            // Step 4: restore original div click behavior
+            imageBox.addEventListener("click", handleDivClick);
+
+            // Step 5: remove this temporary image listener
+            img.removeEventListener("click", handleImageClick);
+        });
+    });
+
+    //add an event listener to previous
+    previous.addEventListener("click", () => {
+        currentSong.pause()
+        
+        console.log('previous--',decodeURIComponent(currentSong.src).split(/[/\\]/).pop())
+        let index = songs.indexOf(decodeURIComponent(currentSong.src).split(/[/\\]/).pop().split('.mp3')[0])
+        console.log('index-'+index)
+        if ((index - 1) >= 0) {
+            playMusic(songs[index - 1])
+
+        }
+    })
+
+
+    //add an event listener to next
+    next.addEventListener("click", () => {
+        currentSong.pause()
+        console.log('cur- '+decodeURI(currentSong.src.split("/").slice(-1)[0]))
+        // just name of it
+        let index = songs.indexOf(decodeURIComponent(currentSong.src).split(/[/\\]/).pop().split('.mp3')[0])
+        console.log('index-'+index)
+
+        if ((index + 1) < songs.length) {
+            playMusic(songs[index + 1])
+
+        }
+
+    })
+
+
+    
+    
+    
+}
+
+main()
