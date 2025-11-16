@@ -108,7 +108,7 @@ async function displayalbums() {
 }
 
 async function main() {
-    await getSongs("songs/ncs");
+    await getSongs("songs/arjan dhillon");
     playMusic(songs[0], true)
 
     //display all the albums on the page
