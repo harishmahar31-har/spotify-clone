@@ -83,6 +83,7 @@ async function displayalbums() {
     cardContainer.innerHTML = "";
 
     data.albums.forEach(album => {
+        console.log(album.folder)
         cardContainer.innerHTML += `
             <div class="card" data-folder="${album.folder}">
                 <div class="play">
@@ -108,7 +109,7 @@ async function displayalbums() {
 }
 
 async function main() {
-    await getSongs("songs/ncs");
+    await getSongs("songs/arjan dhillon");
     playMusic(songs[0], true)
 
     //display all the albums on the page

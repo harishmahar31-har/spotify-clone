@@ -61,7 +61,14 @@ body{
 .search:hover{
     background-color: rgb(41, 40, 40);
 }
+.search input:focus{
+    color: white;
+    outline: none;
+}
 .search:hover input{
+    background-color: rgb(41, 40, 40);
+}
+.search:hover #searchBtn{
     background-color: rgb(41, 40, 40);
 }
 #btnsearch:hover{
@@ -84,6 +91,10 @@ body{
     font-size: 17px;
     /* width: 107px; */
     padding: 10px;
+}
+#searchBtn{
+    background-color: #202020;
+    border: none;
 }
 .left{
     width: 370px;
@@ -230,6 +241,7 @@ body{
      padding: 20px;
      border-radius: 10px;
      border: 1px solid black;
+     z-index: 1;
 }
 .options2 a{
     text-decoration: none;
@@ -330,14 +342,12 @@ body{
     border-radius: 10px;
     margin: 5px;
     padding: 4px;
-
-    
 }
 .playbar{
     align-items: center;
     font-size: larger;
     justify-content: space-around;
-    white-space: nowrap;
+    /* white-space: nowrap; */
 }
 .songinfo{
     width: 140px;
@@ -403,6 +413,18 @@ body{
     .hburgerlibraryclose{
         display: block!important;
     }
+    .playseek{
+    bottom: 15px;
+    }
+    .cardcontainer .card{
+        width: 70vw;
+    }
+    .playbar .playbuttons img{
+        filter: invert();
+    }
+    .right{
+        height: 92vh;
+    }
 }
 @media (max-width: 500px){
     .playbar{
@@ -428,5 +450,6 @@ body{
     .songinfo{
         width: 70px;
     }
+    
 }
 
